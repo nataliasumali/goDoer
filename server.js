@@ -6,6 +6,7 @@ var mongoose = require('mongoose');  // mongoose for mongodb
 var morgan = require('morgan');  // log requests to the console (express4)
 var bodyParser = require('body-parser');  // pull information from HTML POST (express4)
 var methodOverride = require('method-override');  // simulate DELETE and PUT (express4)
+var port = process.env.PORT || 8080;
 
 // configuration ========================
 
@@ -23,15 +24,11 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json'}));
 
 app.use(methodOverride());
 
-// listen (start app with node server.js) =====
-
-app.listen(8080);
-console.log("App listening on port 8080");
-
 // define model ================================
 
 var Todo = mongoose.model('Todo', {
-	text : String
+	text : String,
+	done : Boolean
 });
 
 // routes =======================================
@@ -85,7 +82,25 @@ app.delete('/api/todos/:todo_id', function(req, res) {
 		_id : req.params.todo_id
 	}, function(err, todo) {
 		if (err)
-			res.send(err)
+			res.send(err);
+
+	// get and return all the todos after you create another
+		Todo.find(function(err, todos) {
+			if (err)
+				res.send(err)
 		res.json(todos);
 	});
+	});
 });
+
+// application --------------------------------
+
+app.get('*', function(req, res) {
+	res.sendfile('./public/index.html');
+});
+
+// listen (start app with node server.js) =====
+
+app.listen(port);
+console.log("App listening on port " + port);
+
