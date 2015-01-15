@@ -20,8 +20,10 @@
 
     <!-- SPELLS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
-    <script src="core.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script><!-- load angular -->
+    <script src="js/controllers/main.js"></script>
+    <script src="js/services/todos.js"></script>
+    <script src="js/core.js"></script>
 
 </head>
 <!-- SET THE CONTROLLER AND GET ALL TODOS -->
@@ -54,7 +56,7 @@
                     <div class="form-group">
 
                         <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-                        <input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text">
+                        <input type="text" class="form-control input-lg text-center" placeholder="" ng-model="formData.text">
                     </div>
 
                     <!-- createToDo() WILL CREATE NEW TODOS -->
